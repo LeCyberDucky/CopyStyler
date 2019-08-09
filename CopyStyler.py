@@ -1,9 +1,10 @@
-import win32clipboard as clippy
 from pygments import highlight
 from pygments.lexers.c_cpp import CppLexer
 from pygments.formatters import RtfFormatter
 from pygments.style import Style
 from pygments.styles import STYLE_MAP
+import sys
+import win32clipboard as clippy
 
 # Stylizer settings
 styles = list(STYLE_MAP.keys()) # Available styles
@@ -12,20 +13,8 @@ font = "Monaco"
 fontsize = 24
 
 
-# Stylize
-input = """#include <vector>
-
-int main()
-{
-  using std::cout;
-  using std::begin;   using std::end;
-
-  // Do stuff
-  int x = 4;
-
-  return 0;
-}
-"""
+# Get input and style it
+input = str(sys.argv[1])
 
 output = highlight(input, CppLexer(), RtfFormatter(style=style, fontface=font, fontsize=fontsize))
 
